@@ -1,0 +1,14 @@
+<div *ngIf="data">
+  <h2>{{ dateToday }}</h2>
+
+  <p>Fajr: {{ data.timings.Fajr }}</p>
+  <p>Sunrise: {{ data.timings.Sunrise }}</p>
+  <p>Dhuhr: {{ data.timings.Dhuhr }}</p>
+  <p>Asr: {{ data.timings.Asr }}</p>
+  <p>Maghrib: {{ data.timings.Maghrib }}</p>
+  <p>Isha: {{ data.timings.Isha }}</p>
+</div>
+
+<div *ngIf="!data">
+  <p>Gegevens laden...</p>
+</div>
