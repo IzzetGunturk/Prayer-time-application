@@ -59,7 +59,7 @@ export class ApplicationComponent implements OnInit {
 
     const [h, m] = this.data.timings.Fajr.split(':').map(Number);
     const fajrTommorow = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate() +1, h, m);
-    const diff = dateNow.getTime() - fajrTommorow.getTime();
+    const diff = fajrTommorow.getTime() - dateNow.getTime();
     
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -75,6 +75,6 @@ export class ApplicationComponent implements OnInit {
 
     setInterval(() => {
       this.prayerTimeCountdown();
-    }, 1);
+    }, 1000);
   }
 }
