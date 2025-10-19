@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NamazService } from '../services/namaz.service';
+import { ApiResponse, ApiData, Timings } from '../../interfaces/prayertimes.interfaces';
 
 @Component({
   selector: 'app-application',
@@ -10,10 +11,10 @@ import { NamazService } from '../services/namaz.service';
   styleUrl: './application.component.scss'
 })
 export class ApplicationComponent implements OnInit {
-  data: any;
-  timings: any;
+  data!: ApiData;
+  timings!: Timings;
 
-  constructor(private namazService: NamazService) {}
+  private namazService = inject(NamazService);
 
   dateNow = new Date();
 
@@ -26,7 +27,7 @@ export class ApplicationComponent implements OnInit {
   getApiInformation() {
     this.namazService.getTimes("Roermond", "Netherlands")
     .subscribe({
-      next: (res: any) => {
+      next: (res: ApiResponse) => {
         this.data = res.data;
         this.timings = res.data.timings;
         console.log(this.data)
