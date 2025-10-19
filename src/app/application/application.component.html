@@ -1,5 +1,6 @@
 <div *ngIf="data">
-  <h2>{{ dateToday }}</h2>
+  <app-time-and-date></app-time-and-date>
+  {{timeLeft}}
 
   <p>Fajr: {{ data.timings.Fajr }}</p>
   <p>Sunrise: {{ data.timings.Sunrise }}</p>
