@@ -10,6 +10,6 @@ export class NamazService {
   private http = inject(HttpClient);
 
   getTimes(city: string, country: string): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.baseUrl}?city=${city}&country=${country}`);
+    return this.http.get<ApiResponse>(`${this.baseUrl}?city=${city}&country=${country}&method=3`);
   }
 }
