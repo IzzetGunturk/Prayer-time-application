@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NamazService } from '../services/namaz.service';
+import { ActivatedRoute } from '@angular/router';
 import { TimeAndDateComponent } from './time-and-date/time-and-date.component';
 import { ApiResponse, ApiData, Timings } from '../../interfaces/prayertimes.interfaces';
 
@@ -15,11 +16,13 @@ export class ApplicationComponent implements OnInit {
   data!: ApiData;
   timings!: Timings;
   timeLeft!: string;
+  city: string = '';
 
+  private route = inject(ActivatedRoute);
   private namazService = inject(NamazService);
 
-  getApiInformation() {
-    this.namazService.getTimes("Roermond", "Netherlands")
+  getApiInformation(city: string) {
+    this.namazService.getTimes(city, "Netherlands")
     .subscribe({
       next: (res: ApiResponse) => {
         this.data = res.data;
@@ -71,7 +74,11 @@ export class ApplicationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getApiInformation();
+    this.route.params.subscribe(params => {
+      const city = params['city'];
+      this.city = city || 'Amsterdam';
+      this.getApiInformation(this.city);
+    });
 
     setInterval(() => {
       this.prayerTimeCountdown();
